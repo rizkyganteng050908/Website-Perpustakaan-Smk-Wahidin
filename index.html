@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perpustakaan Digital - SMK Wahidin Kota Cirebon</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- QRCode JS Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            800: '#166534',
+                            900: '#14532d',
+                        },
+                        navy: {
+                            800: '#1e293b',
+                            900: '#0f172a',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .bg-grid-pattern {
+            background-image: radial-gradient(rgba(22, 163, 74, 0.15) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 flex flex-col min-h-screen">
+
+    <!-- Header / Navbar -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo & Brand Name -->
+                <div class="flex items-center space-x-3">
+                    <div class="w-12 h-12 bg-gradient-to-tr from-brand-600 to-teal-500 rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-md shadow-brand-500/20">
+                        <i class="fa-solid fa-book-bookmark text-2xl"></i>
+                    </div>
+                    <div>
+                        <span class="block text-lg font-bold text-slate-900 leading-tight">PERPUSTAKAAN</span>
+                        <span class="block text-xs font-semibold text-brand-600 tracking-wider">SMK WAHIDIN CIREBON</span>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
+                    <a href="#beranda" class="text-brand-600 font-semibold hover:text-brand-700 transition-colors">Beranda</a>
+                    <a href="#katalog" class="text-slate-600 hover:text-brand-600 transition-colors">Katalog Buku</a>
+                    <a href="#layanan" class="text-slate-600 hover:text-brand-600 transition-colors">Layanan & Fasilitas</a>
+                    <a href="#peminjaman" class="text-slate-600 hover:text-brand-600 transition-colors">Peminjaman Online</a>
+                    <a href="#berita" class="text-slate-600 hover:text-brand-600 transition-colors">Berita</a>
+                    <a href="#kontak" class="text-slate-600 hover:text-brand-600 transition-colors">Kontak</a>
+                </nav>
+
+                <!-- Quick Action CTA -->
+                <div class="hidden lg:flex items-center space-x-3">
+                    <a href="#peminjaman" class="bg-brand-600 hover:bg-brand-700 text-white font-medium px-5 py-2.5 rounded-xl shadow-sm hover:shadow-md transition-all flex items-center gap-2 text-sm">
+                        <i class="fa-solid fa-hand-holding-hand"></i> Pinjam Buku
+                    </a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" type="button" class="text-slate-600 hover:text-slate-900 focus:outline-none p-2 rounded-lg">
+                        <i class="fa-solid fa-bars text-2xl" id="menu-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden border-t border-slate-100 bg-white px-4 pt-3 pb-6 space-y-3 shadow-lg">
+            <a href="#beranda" class="mobile-nav-link block px-3 py-2 rounded-lg text-base font-medium text-brand-600 bg-brand-50">Beranda</a>
+            <a href="#katalog" class="mobile-nav-link block px-3 py-2 rounded-lg text-base font-medium text-slate-700 hover:bg-slate-50">Katalog Buku</a>
+            <a href="#layanan" class="mobile-nav-link block px-3 py-2 rounded-lg text-base font-medium text-slate-700 hover:bg-slate-50">Layanan & Fasilitas</a>
+            <a href="#peminjaman" class="mobile-nav-link block px-3 py-2 rounded-lg text-base font-medium text-slate-700 hover:bg-slate-50">Peminjaman Online</a>
+            <a href="#berita" class="mobile-nav-link block px-3 py-2 rounded-lg text-base font-medium text-slate-700 hover:bg-slate-50">Berita</a>
+            <a href="#kontak" class="mobile-nav-link block px-3 py-2 rounded-lg text-base font-medium text-slate-700 hover:bg-slate-50">Kontak</a>
+            <div class="pt-2">
+                <a href="#peminjaman" class="w-full text-center block bg-brand-600 hover:bg-brand-700 text-white font-medium px-4 py-2.5 rounded-xl">
+                    Pinjam Buku Sekarang
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="beranda" class="relative bg-gradient-to-b from-teal-900 via-slate-900 to-navy-900 text-white pt-16 pb-24 overflow-hidden">
+        <!-- Background Decorative Elements -->
+        <div class="absolute inset-0 bg-grid-pattern opacity-20"></div>
+        <div class="absolute -top-24 -left-24 w-96 h-96 bg-brand-500/20 rounded-full blur-3xl"></div>
+        <div class="absolute top-1/2 -right-24 w-96 h-96 bg-teal-500/20 rounded-full blur-3xl"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <!-- Hero Text Content -->
+                <div class="lg:col-span-7 text-center lg:text-left">
+                    <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-brand-500/20 text-brand-300 border border-brand-500/30 mb-6">
+                        <i class="fa-solid fa-graduation-cap"></i> Perpustakaan Digital SMK Wahidin Cirebon
+                    </span>
+                    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight mb-6">
+                        Jelajahi Ilmu & Terangi Masa Depan di <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-400 to-teal-300">Ruang Baca Digital</span>
+                    </h1>
+                    <p class="text-slate-300 text-base sm:text-lg mb-8 max-w-2xl mx-auto lg:mx-0 font-light">
+                        Pusat literasi terpadu untuk mendukung keahlian siswa Teknik Komputer, Otomotif, Akuntansi, dan Rekayasa Perangkat Lunak SMK Wahidin Kota Cirebon.
+                    </p>
+
+                    <!-- Hero Quick Search Bar -->
+                    <div class="bg-white/10 backdrop-blur-md p-2 rounded-2xl border border-white/20 shadow-2xl max-w-xl mx-auto lg:mx-0 mb-8">
+                        <form onsubmit="handleHeroSearch(event)" class="flex flex-col sm:flex-row gap-2">
+                            <div class="relative flex-1">
+                                <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400"></i>
+                                <input id="hero-search-input" type="text" placeholder="Cari judul buku, penulis, atau topik..." class="w-full pl-11 pr-4 py-3 bg-white text-slate-900 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500 text-sm">
+                            </div>
+                            <button type="submit" class="bg-brand-600 hover:bg-brand-500 text-white font-semibold px-6 py-3 rounded-xl transition-all flex items-center justify-center gap-2 text-sm shadow-lg shadow-brand-600/30">
+                                Cari Buku
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- CTA Buttons -->
+                    <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4">
+                        <a href="#katalog" class="bg-white text-slate-900 hover:bg-slate-100 font-semibold px-6 py-3 rounded-xl transition-all shadow-md hover:shadow-lg text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-book-open text-brand-600"></i> Lihat Katalog Buku
+                        </a>
+                        <a href="#peminjaman" class="bg-slate-800/80 hover:bg-slate-800 text-white font-semibold px-6 py-3 rounded-xl border border-slate-700 transition-all text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-qrcode text-teal-400"></i> Peminjaman Online
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Hero Illustration / Featured Image -->
+                <div class="lg:col-span-5 flex justify-center">
+                    <div class="relative w-full max-w-md">
+                        <div class="absolute inset-0 bg-gradient-to-tr from-brand-500 to-teal-400 rounded-3xl transform rotate-3 blur-md opacity-40"></div>
+                        <div class="relative bg-slate-800/90 border border-slate-700/80 rounded-3xl p-6 shadow-2xl backdrop-blur-xl">
+                            <div class="flex items-center justify-between pb-4 mb-4 border-b border-slate-700">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                                    <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                                    <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                                </div>
+                                <span class="text-xs text-slate-400 font-mono">Buku Populer Minggu Ini</span>
+                            </div>
+                            
+                            <!-- Highlight Card in Hero -->
+                            <div id="hero-featured-card" class="flex gap-4 items-center bg-slate-900/60 p-3 rounded-2xl border border-slate-700/50">
+                                <img src="https://placehold.co/120x160/16a34a/ffffff?text=Pemrograman+Web" alt="Cover Buku" class="w-20 h-28 object-cover rounded-lg shadow-md">
+                                <div class="space-y-1">
+                                    <span class="inline-block px-2 py-0.5 bg-brand-500/20 text-brand-400 text-[10px] font-semibold rounded-full">RPL & TKJ</span>
+                                    <h4 class="text-sm font-semibold text-white line-clamp-2">Pemrograman Web & Perangkat Bergerak</h4>
+                                    <p class="text-xs text-slate-400">Penulis: Budi Raharjo</p>
+                                    <div class="flex items-center gap-1 text-amber-400 text-xs pt-1">
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star-half-stroke"></i>
+                                        <span class="text-slate-400 text-[10px] ml-1">(4.8)</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mt-4 pt-3 border-t border-slate-700/60 flex justify-between items-center text-xs text-slate-400">
+                                <span class="flex items-center gap-1"><i class="fa-solid fa-check-circle text-emerald-400"></i> Stok Tersedia: 5 Eks</span>
+                                <a href="#katalog" onclick="filterCategory('Teknologi/RPL')" class="text-brand-400 hover:text-brand-300 font-medium">Pinjam <i class="fa-solid fa-arrow-right text-[10px]"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stat Cards Section -->
+    <section class="relative z-20 -mt-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+            <!-- Stat Item 1 -->
+            <div class="bg-white rounded-2xl p-5 shadow-lg border border-slate-100 flex items-center space-x-4">
+                <div class="w-12 h-12 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center text-xl shrink-0">
+                    <i class="fa-solid fa-books"></i>
+                </div>
+                <div>
+                    <p class="text-xs font-semibold uppercase tracking-wider text-slate-400">Koleksi Buku</p>
+                    <h3 class="text-2xl font-extrabold text-slate-800">4,850+</h3>
+                </div>
+            </div>
+            <!-- Stat Item 2 -->
+            <div class="bg-white rounded-2xl p-5 shadow-lg border border-slate-100 flex items-center space-x-4">
+                <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-xl shrink-0">
+                    <i class="fa-solid fa-users"></i>
+                </div>
+                <div>
+                    <p class="text-xs font-semibold uppercase tracking-wider text-slate-400">Anggota Aktif</p>
+                    <h3 class="text-2xl font-extrabold text-slate-800">1,240</h3>
+                </div>
+            </div>
+            <!-- Stat Item 3 -->
+            <div class="bg-white rounded-2xl p-5 shadow-lg border border-slate-100 flex items-center space-x-4">
+                <div class="w-12 h-12 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center text-xl shrink-0">
+                    <i class="fa-solid fa-hand-holding-box"></i>
+                </div>
+                <div>
+                    <p class="text-xs font-semibold uppercase tracking-wider text-slate-400">Buku Dipinjam</p>
+                    <h3 class="text-2xl font-extrabold text-slate-800">312</h3>
+                </div>
+            </div>
+            <!-- Stat Item 4 -->
+            <div class="bg-white rounded-2xl p-5 shadow-lg border border-slate-100 flex items-center space-x-4">
+                <div class="w-12 h-12 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center text-xl shrink-0">
+                    <i class="fa-solid fa-chart-line"></i>
+                </div>
+                <div>
+                    <p class="text-xs font-semibold uppercase tracking-wider text-slate-400">Pengunjung / Bln</p>
+                    <h3 class="text-2xl font-extrabold text-slate-800">2,150</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Catalog Section -->
+    <section id="katalog" class="py-20 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Section Title -->
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <h2 class="text-xs font-bold uppercase tracking-widest text-brand-600 mb-2">Koleksi Terlengkap</h2>
+                <h3 class="text-3xl font-extrabold text-slate-900 sm:text-4xl">Katalog Perpustakaan Interaktif</h3>
+                <p class="mt-3 text-slate-600 text-sm sm:text-base">Temukan pustaka pendukung pembelajaran jurusan TKRO, RPL, Akuntansi, hingga koleksi umum dan fiksi.</p>
+            </div>
+
+            <!-- Filters & Search Controls -->
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 mb-8 space-y-4">
+                <div class="flex flex-col md:flex-row gap-4 justify-between items-center">
+                    <!-- Search Input -->
+                    <div class="relative w-full md:w-80">
+                        <i class="fa-solid fa-search absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                        <input id="catalog-search" type="text" placeholder="Cari judul atau penulis..." oninput="filterBooks()" class="w-full pl-10 pr-4 py-2 bg-slate-100 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
+                    </div>
+
+                    <!-- Category Filter Buttons -->
+                    <div class="flex flex-wrap gap-2 w-full md:w-auto justify-start md:justify-end" id="category-buttons">
+                        <button onclick="setCategoryFilter('Semua')" class="category-btn active px-4 py-2 rounded-xl text-xs font-semibold transition-all bg-brand-600 text-white">Semua</button>
+                        <button onclick="setCategoryFilter('Teknologi/RPL')" class="category-btn px-4 py-2 rounded-xl text-xs font-semibold transition-all bg-slate-100 text-slate-600 hover:bg-slate-200">Teknologi / RPL</button>
+                        <button onclick="setCategoryFilter('Otomotif/TKRO')" class="category-btn px-4 py-2 rounded-xl text-xs font-semibold transition-all bg-slate-100 text-slate-600 hover:bg-slate-200">Otomotif / TKRO</button>
+                        <button onclick="setCategoryFilter('Akuntansi')" class="category-btn px-4 py-2 rounded-xl text-xs font-semibold transition-all bg-slate-100 text-slate-600 hover:bg-slate-200">Akuntansi</button>
+                        <button onclick="setCategoryFilter('Novel')" class="category-btn px-4 py-2 rounded-xl text-xs font-semibold transition-all bg-slate-100 text-slate-600 hover:bg-slate-200">Novel / Fiksi</button>
+                        <button onclick="setCategoryFilter('Umum')" class="category-btn px-4 py-2 rounded-xl text-xs font-semibold transition-all bg-slate-100 text-slate-600 hover:bg-slate-200">Umum</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Books Grid -->
+            <div id="books-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <!-- Book Cards will be rendered dynamically via JS -->
+            </div>
+
+            <!-- Empty State Message -->
+            <div id="empty-catalog-state" class="hidden text-center py-16 bg-white rounded-2xl border border-slate-200">
+                <i class="fa-solid fa-folder-open text-5xl text-slate-300 mb-3"></i>
+                <h4 class="text-lg font-bold text-slate-700">Buku tidak ditemukan</h4>
+                <p class="text-sm text-slate-500 mt-1">Coba gunakan kata kunci lain atau pilih kategori yang berbeda.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Online Borrowing Section -->
+    <section id="peminjaman" class="py-20 bg-white border-t border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                
+                <!-- Info Column -->
+                <div class="lg:col-span-5 space-y-6">
+                    <div>
+                        <span class="text-xs font-bold uppercase tracking-widest text-brand-600">Layanan Praktis</span>
+                        <h2 class="text-3xl font-extrabold text-slate-900 sm:text-4xl mt-1">Peminjaman Buku Online</h2>
+                        <p class="mt-3 text-slate-600 text-sm sm:text-base leading-relaxed">
+                            Siswa SMK Wahidin dapat melakukan pengajuan peminjaman secara mandiri dari rumah. Tunjukkan bukti barcode saat pengambilan buku di perpustakaan.
+                        </p>
+                    </div>
+
+                    <!-- Step Cards -->
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-4 p-4 rounded-xl bg-slate-50 border border-slate-100">
+                            <div class="w-8 h-8 rounded-full bg-brand-600 text-white font-bold flex items-center justify-center shrink-0 text-sm">1</div>
+                            <div>
+                                <h4 class="text-sm font-bold text-slate-800">Isi Form Peminjaman</h4>
+                                <p class="text-xs text-slate-500 mt-0.5">Lengkapi NISN, nama, dan pilih buku yang hendak dipinjam.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 rounded-xl bg-slate-50 border border-slate-100">
+                            <div class="w-8 h-8 rounded-full bg-brand-600 text-white font-bold flex items-center justify-center shrink-0 text-sm">2</div>
+                            <div>
+                                <h4 class="text-sm font-bold text-slate-800">Dapatkan QR Code Struk</h4>
+                                <p class="text-xs text-slate-500 mt-0.5">Sistem akan secara otomatis menerbitkan tiket peminjaman digital.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 rounded-xl bg-slate-50 border border-slate-100">
+                            <div class="w-8 h-8 rounded-full bg-brand-600 text-white font-bold flex items-center justify-center shrink-0 text-sm">3</div>
+                            <div>
+                                <h4 class="text-sm font-bold text-slate-800">Ambil Buku di Meja Sirkulasi</h4>
+                                <p class="text-xs text-slate-500 mt-0.5">Tunjukkan QR code kepada petugas perpustakaan untuk verifikasi.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Form Column -->
+                <div class="lg:col-span-7">
+                    <div class="bg-slate-50 p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-xl">
+                        <h3 class="text-xl font-bold text-slate-900 mb-6 flex items-center gap-2">
+                            <i class="fa-solid fa-file-signature text-brand-600"></i> Formulir Pengajuan
+                        </h3>
+
+                        <form id="borrowing-form" onsubmit="handleBorrowSubmit(event)" class="space-y-4">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-semibold text-slate-700 mb-1">Nama Lengkap Siswa *</label>
+                                    <input type="text" id="borrower-name" required placeholder="Contoh: Muhammad Rizky" class="w-full px-4 py-2.5 bg-white border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-slate-700 mb-1">NISN / NIS *</label>
+                                    <input type="text" id="borrower-nisn" required placeholder="Contoh: 0051234567" class="w-full px-4 py-2.5 bg-white border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-semibold text-slate-700 mb-1">Kelas & Jurusan *</label>
+                                    <select id="borrower-class" required class="w-full px-4 py-2.5 bg-white border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
+                                        <option value="">-- Pilih Kelas --</option>
+                                        <option value="X RPL">X RPL (Rekayasa Perangkat Lunak)</option>
+                                        <option value="XI RPL">XI RPL (Rekayasa Perangkat Lunak)</option>
+                                        <option value="XII RPL">XII RPL (Rekayasa Perangkat Lunak)</option>
+                                        <option value="X TKRO">X TKRO (Otomotif)</option>
+                                        <option value="XI TKRO">XI TKRO (Otomotif)</option>
+                                        <option value="XII TKRO">XII TKRO (Otomotif)</option>
+                                        <option value="X AKL">X AKL (Akuntansi)</option>
+                                        <option value="XI AKL">XI AKL (Akuntansi)</option>
+                                        <option value="XII AKL">XII AKL (Akuntansi)</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-slate-700 mb-1">Pilih Judul Buku *</label>
+                                    <select id="borrower-book" required class="w-full px-4 py-2.5 bg-white border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
+                                        <option value="">-- Pilih Buku yang Tersedia --</option>
+                                        <!-- Dynamic options will be populated via JS -->
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-semibold text-slate-700 mb-1">Tanggal Pinjam *</label>
+                                    <input type="date" id="borrower-date" required class="w-full px-4 py-2.5 bg-white border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-slate-700 mb-1">Durasi Peminjaman</label>
+                                    <input type="text" value="7 Hari (Standar)" disabled class="w-full px-4 py-2.5 bg-slate-200 border border-slate-300 rounded-xl text-sm text-slate-600 cursor-not-allowed">
+                                </div>
+                            </div>
+
+                            <div class="pt-2">
+                                <button type="submit" class="w-full bg-brand-600 hover:bg-brand-700 text-white font-bold py-3 px-6 rounded-xl shadow-lg shadow-brand-600/30 transition-all text-sm flex items-center justify-center gap-2">
+                                    <i class="fa-solid fa-paper-plane"></i> Ajukan Peminjaman & Cetak Tiket
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Services & Facilities Section -->
+    <section id="layanan" class="py-20 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-bold uppercase tracking-widest text-brand-600 mb-2">Kenyamanan Belajar</h2>
+                <h3 class="text-3xl font-extrabold text-slate-900 sm:text-4xl">Layanan & Fasilitas Unggulan</h3>
+                <p class="mt-3 text-slate-600 text-sm sm:text-base">Perpustakaan SMK Wahidin terus berinovasi menyediakan ruang baca modern dan adaptif.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Facility 1 -->
+                <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-teal-50 text-teal-600 flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-snowflake"></i>
+                    </div>
+                    <h4 class="text-lg font-bold text-slate-900 mb-2">Ruang Baca Ber-AC</h4>
+                    <p class="text-slate-600 text-sm leading-relaxed">Suasana ruang baca yang sejuk, bersih, dan tenang dirancang khusus untuk kenyamanan membaca dan belajar kelompok.</p>
+                </div>
+
+                <!-- Facility 2 -->
+                <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-wifi"></i>
+                    </div>
+                    <h4 class="text-lg font-bold text-slate-900 mb-2">Wi-Fi Akses Cepat</h4>
+                    <p class="text-slate-600 text-sm leading-relaxed">Akses internet gratis berkecepatan tinggi bagi siswa yang memerlukan referensi daring atau pengerjaan tugas sekolah.</p>
+                </div>
+
+                <!-- Facility 3 -->
+                <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-desktop"></i>
+                    </div>
+                    <h4 class="text-lg font-bold text-slate-900 mb-2">Komputer OPAC & E-Library</h4>
+                    <p class="text-slate-600 text-sm leading-relaxed">Terminal pencarian katalog digital cepat dan deretan komputer untuk mengakses ribuan jurnal/e-book lokal.</p>
+                </div>
+
+                <!-- Facility 4 -->
+                <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-comments"></i>
+                    </div>
+                    <h4 class="text-lg font-bold text-slate-900 mb-2">Area Diskusi Kelompok</h4>
+                    <p class="text-slate-600 text-sm leading-relaxed">Sudut khusus yang fleksibel untuk kerja kelompok tanpa mengganggu pengunjung di area baca tenang.</p>
+                </div>
+
+                <!-- Facility 5 -->
+                <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-print"></i>
+                    </div>
+                    <h4 class="text-lg font-bold text-slate-900 mb-2">Layanan Cetak & Mandiri</h4>
+                    <p class="text-slate-600 text-sm leading-relaxed">Fasilitas pencetakan tugas sekolah dengan tarif terjangkau khusus anggota aktif perpustakaan.</p>
+                </div>
+
+                <!-- Facility 6 -->
+                <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-clock-rotate-left"></i>
+                    </div>
+                    <h4 class="text-lg font-bold text-slate-900 mb-2">Sirkulasi Cepat Barcode</h4>
+                    <p class="text-slate-600 text-sm leading-relaxed">Proses peminjaman dan pengembalian buku ringkas hanya dalam hitungan detik menggunakan pindaian barcode.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hours & Rules Section -->
+    <section class="py-16 bg-gradient-to-r from-slate-900 via-navy-900 to-teal-950 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Hours -->
+                <div class="bg-white/5 border border-white/10 p-8 rounded-3xl backdrop-blur-md">
+                    <h3 class="text-xl font-bold mb-6 flex items-center gap-3 text-brand-400">
+                        <i class="fa-solid fa-clock text-2xl"></i> Jam Operasional Perpustakaan
+                    </h3>
+                    <ul class="space-y-4 text-sm">
+                        <li class="flex justify-between items-center pb-3 border-b border-white/10">
+                            <span class="text-slate-300">Senin - Kamis</span>
+                            <span class="font-semibold text-white bg-white/10 px-3 py-1 rounded-lg">07.00 - 15.30 WIB</span>
+                        </li>
+                        <li class="flex justify-between items-center pb-3 border-b border-white/10">
+                            <span class="text-slate-300">Jumat</span>
+                            <span class="font-semibold text-white bg-white/10 px-3 py-1 rounded-lg">07.00 - 11.30 WIB</span>
+                        </li>
+                        <li class="flex justify-between items-center pb-3 border-b border-white/10">
+                            <span class="text-slate-300">Sabtu</span>
+                            <span class="font-semibold text-white bg-white/10 px-3 py-1 rounded-lg">07.30 - 13.00 WIB</span>
+                        </li>
+                        <li class="flex justify-between items-center text-rose-400">
+                            <span>Minggu & Hari Libur Nasional</span>
+                            <span class="font-semibold bg-rose-500/20 text-rose-300 px-3 py-1 rounded-lg">Tutup</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Rules -->
+                <div class="bg-white/5 border border-white/10 p-8 rounded-3xl backdrop-blur-md">
+                    <h3 class="text-xl font-bold mb-6 flex items-center gap-3 text-teal-400">
+                        <i class="fa-solid fa-clipboard-check text-2xl"></i> Tata Tertib Pengunjung
+                    </h3>
+                    <ul class="space-y-3 text-sm text-slate-300">
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-check text-brand-400 mt-1"></i>
+                            <span>Wajib mengisi buku tamu digital di komputer OPAC saat masuk perpustakaan.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-check text-brand-400 mt-1"></i>
+                            <span>Menjaga ketenangan dan tidak makan/minum di area ruang baca.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-check text-brand-400 mt-1"></i>
+                            <span>Batas peminjaman maksimal 3 buku dengan periode peminjaman 7 hari.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-check text-brand-400 mt-1"></i>
+                            <span>Keterlambatan pengembalian buku dikenakan denda administratif sesuai ketentuan sekolah.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- News/Announcements Section -->
+    <section id="berita" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-widest text-brand-600">Kabar Perpustakaan</span>
+                    <h3 class="text-3xl font-extrabold text-slate-900 sm:text-4xl mt-1">Berita & Pengumuman</h3>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- News 1 -->
+                <div class="bg-slate-50 rounded-2xl overflow-hidden border border-slate-200 hover:shadow-md transition-all">
+                    <img src="https://placehold.co/600x400/16a34a/ffffff?text=Penambahan+Buku+Baru" alt="News Image" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <span class="text-xs text-brand-600 font-semibold">12 Oktober 2026</span>
+                        <h4 class="text-base font-bold text-slate-900 mt-1 mb-2">Penambahan 200+ Judul Buku Kejuruan Baru</h4>
+                        <p class="text-slate-600 text-xs line-clamp-2">Perpustakaan SMK Wahidin Cirebon kini melengkapi koleksi modul praktik Teknik Kendaraan Ringan dan Rekayasa Perangkat Lunak.</p>
+                    </div>
+                </div>
+
+                <!-- News 2 -->
+                <div class="bg-slate-50 rounded-2xl overflow-hidden border border-slate-200 hover:shadow-md transition-all">
+                    <img src="https://placehold.co/600x400/0f172a/ffffff?text=Pekan+Literasi+Digital" alt="News Image" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <span class="text-xs text-brand-600 font-semibold">28 September 2026</span>
+                        <h4 class="text-base font-bold text-slate-900 mt-1 mb-2">Pekan Duta Literasi Siswa SMK Wahidin</h4>
+                        <p class="text-slate-600 text-xs line-clamp-2">Ajang apresiasi siswa dengan jumlah peminjaman terbanyak bulan ini. Dapatkan voucher buku gratis!</p>
+                    </div>
+                </div>
+
+                <!-- News 3 -->
+                <div class="bg-slate-50 rounded-2xl overflow-hidden border border-slate-200 hover:shadow-md transition-all">
+                    <img src="https://placehold.co/600x400/0284c7/ffffff?text=Layanan+E-Library" alt="News Image" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <span class="text-xs text-brand-600 font-semibold">15 September 2026</span>
+                        <h4 class="text-base font-bold text-slate-900 mt-1 mb-2">Akses E-Book Gratis dari Rumah via Portal OPAC</h4>
+                        <p class="text-slate-600 text-xs line-clamp-2">Kini seluruh siswa dapat mengunduh e-book pelajaran resmi secara fleksibel dari perangkat masing-masing.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="kontak" class="bg-slate-900 text-white border-t border-slate-800 pt-16 pb-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 pb-12 border-b border-slate-800">
+                <!-- Col 1: About -->
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 bg-brand-600 rounded-xl flex items-center justify-center text-white font-bold text-lg">
+                            <i class="fa-solid fa-book-bookmark"></i>
+                        </div>
+                        <span class="font-bold text-lg text-white">SMK Wahidin Cirebon</span>
+                    </div>
+                    <p class="text-slate-400 text-xs leading-relaxed">
+                        Mewujudkan generasi terampil, berkarakter, dan berwawasan luas melalui penyediaan sarana literasi berkualitas di Kota Cirebon.
+                    </p>
+                </div>
+
+                <!-- Col 2: Navigation -->
+                <div>
+                    <h4 class="text-sm font-bold text-white mb-4">Tautan Cepat</h4>
+                    <ul class="space-y-2 text-xs text-slate-400">
+                        <li><a href="#beranda" class="hover:text-brand-400 transition-colors">Beranda</a></li>
+                        <li><a href="#katalog" class="hover:text-brand-400 transition-colors">Katalog Buku Digital</a></li>
+                        <li><a href="#peminjaman" class="hover:text-brand-400 transition-colors">Peminjaman Buku Online</a></li>
+                        <li><a href="#layanan" class="hover:text-brand-400 transition-colors">Layanan & Fasilitas</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Contact Info -->
+                <div>
+                    <h4 class="text-sm font-bold text-white mb-4">Kontak Perpustakaan</h4>
+                    <ul class="space-y-3 text-xs text-slate-400">
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-location-dot text-brand-500 mt-0.5"></i>
+                            <span>Jl. Dr. Wahidin Sudirohusodo No.79, Kota Cirebon, Jawa Barat</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-envelope text-brand-500"></i>
+                            <span>perpustakaan@smkwahidin.sch.id</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-phone text-brand-500"></i>
+                            <span>(0231) 203xxx</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Col 4: Social Media & Hours -->
+                <div>
+                    <h4 class="text-sm font-bold text-white mb-4">Media Sosial</h4>
+                    <p class="text-xs text-slate-400 mb-3">Ikuti informasi pustaka dan kegiatan sekolah terbaru:</p>
+                    <div class="flex space-x-3">
+                        <a href="#" class="w-9 h-9 rounded-lg bg-slate-800 hover:bg-brand-600 flex items-center justify-center text-slate-300 hover:text-white transition-all">
+                            <i class="fa-brands fa-instagram text-sm"></i>
+                        </a>
+                        <a href="#" class="w-9 h-9 rounded-lg bg-slate-800 hover:bg-brand-600 flex items-center justify-center text-slate-300 hover:text-white transition-all">
+                            <i class="fa-brands fa-facebook-f text-sm"></i>
+                        </a>
+                        <a href="#" class="w-9 h-9 rounded-lg bg-slate-800 hover:bg-brand-600 flex items-center justify-center text-slate-300 hover:text-white transition-all">
+                            <i class="fa-brands fa-youtube text-sm"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Copyright -->
+            <div class="pt-8 flex flex-col sm:flex-row justify-between items-center text-xs text-slate-500">
+                <p>&copy; 2026 Perpustakaan SMK Wahidin Kota Cirebon. Hak Cipta Dilindungi.</p>
+                <p class="mt-2 sm:mt-0">Sistem Informasi Perpustakaan Digital</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal 1: Book Detail Modal -->
+    <div id="book-modal" class="fixed inset-0 z-50 hidden bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl border border-slate-100 relative overflow-hidden transform transition-all">
+            <button onclick="closeBookModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="flex flex-col sm:flex-row gap-6 items-start">
+                <img id="modal-book-cover" src="" alt="Cover Buku" class="w-32 h-44 object-cover rounded-xl shadow-md shrink-0 mx-auto sm:mx-0">
+                <div class="space-y-2 text-center sm:text-left">
+                    <span id="modal-book-category" class="inline-block px-2.5 py-1 bg-brand-50 text-brand-700 text-xs font-semibold rounded-full"></span>
+                    <h3 id="modal-book-title" class="text-xl font-bold text-slate-900 leading-snug"></h3>
+                    <p id="modal-book-author" class="text-xs text-slate-500"></p>
+                    <p id="modal-book-isbn" class="text-xs font-mono text-slate-400"></p>
+                    <div class="pt-2">
+                        <span id="modal-book-status" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-4 pt-4 border-t border-slate-100">
+                <h4 class="text-xs font-bold uppercase text-slate-400 mb-1">Ringkasan Sinopsis</h4>
+                <p id="modal-book-desc" class="text-xs text-slate-600 leading-relaxed"></p>
+            </div>
+            <div class="mt-6 flex justify-end gap-3">
+                <button onclick="closeBookModal()" class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-100">Tutup</button>
+                <button id="modal-borrow-btn" onclick="directBorrowFromModal()" class="px-5 py-2 rounded-xl text-xs font-semibold bg-brand-600 hover:bg-brand-700 text-white shadow-md">
+                    Pinjam Buku Ini
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 2: Loan Receipt / Ticket Modal with QR Code -->
+    <div id="receipt-modal" class="fixed inset-0 z-50 hidden bg-slate-900/70 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl relative border border-slate-100">
+            <button onclick="closeReceiptModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            
+            <div class="text-center mb-6">
+                <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-2 text-xl">
+                    <i class="fa-solid fa-circle-check"></i>
+                </div>
+                <h3 class="text-lg font-bold text-slate-900">Pengajuan Peminjaman Berhasil!</h3>
+                <p class="text-xs text-slate-500">Tunjukkan bukti ini kepada petugas perpustakaan.</p>
+            </div>
+
+            <!-- Receipt Card -->
+            <div class="bg-slate-50 p-4 rounded-2xl border border-dashed border-slate-300 space-y-3 font-sans text-xs">
+                <div class="flex justify-between pb-2 border-b border-slate-200">
+                    <span class="text-slate-500">Kode Transaksi:</span>
+                    <span id="receipt-id" class="font-mono font-bold text-slate-800"></span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-slate-500">Nama Siswa:</span>
+                    <span id="receipt-name" class="font-medium text-slate-900"></span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-slate-500">NISN / Kelas:</span>
+                    <span id="receipt-nisn-class" class="font-medium text-slate-900"></span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-slate-500">Judul Buku:</span>
+                    <span id="receipt-book" class="font-bold text-brand-700 text-right max-w-[200px]"></span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-slate-500">Tanggal Pinjam:</span>
+                    <span id="receipt-date" class="font-medium text-slate-900"></span>
+                </div>
+                <div class="flex justify-between pt-2 border-t border-slate-200 text-rose-600 font-semibold">
+                    <span>Batas Pengembalian:</span>
+                    <span id="receipt-due"></span>
+                </div>
+
+                <!-- QR Code Display -->
+                <div class="pt-3 text-center flex flex-col items-center justify-center">
+                    <div id="qrcode" class="p-2 bg-white rounded-xl shadow-sm border border-slate-200"></div>
+                    <span class="text-[10px] text-slate-400 mt-2 font-mono">Pindai QR ini di loket perpustakaan</span>
+                </div>
+            </div>
+
+            <div class="mt-6 flex gap-3">
+                <button onclick="window.print()" class="w-full py-2.5 rounded-xl border border-slate-300 text-xs font-semibold text-slate-700 hover:bg-slate-100 flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-print"></i> Cetak Bukti
+                </button>
+                <button onclick="closeReceiptModal()" class="w-full py-2.5 rounded-xl bg-brand-600 text-xs font-semibold text-white hover:bg-brand-700 shadow-md">
+                    Selesai
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        // Sample Book Dataset
+        const booksData = [
+            {
+                id: 1,
+                title: "Pemrograman Web & Perangkat Bergerak",
+                author: "Budi Raharjo, S.Kom",
+                category: "Teknologi/RPL",
+                status: "Tersedia",
+                isbn: "978-602-1234-56-1",
+                cover: "https://placehold.co/300x400/16a34a/ffffff?text=Pemrograman+Web",
+                desc: "Panduan praktis pembuatan aplikasi berbasis web modern menggunakan HTML, CSS, JavaScript, dan kerangka kerja terpopuler untuk jurusan Rekayasa Perangkat Lunak."
+            },
+            {
+                id: 2,
+                title: "Pemeliharaan Mesin Kendaraan Ringan",
+                author: "Ir. Ahmad Supriyadi",
+                category: "Otomotif/TKRO",
+                status: "Tersedia",
+                isbn: "978-602-9876-12-3",
+                cover: "https://placehold.co/300x400/0284c7/ffffff?text=Mesin+Otomotif",
+                desc: "Modul komprehensif servis berkala, sistem bahan bakar injeksi, dan diagnostik gangguan mesin mobil sesuai standar industri otomotif."
+            },
+            {
+                id: 3,
+                title: "Akuntansi Keuangan Lembaga SMK",
+                author: "Dra. Siti Nurhaliza",
+                category: "Akuntansi",
+                status: "Dipinjam",
+                isbn: "978-602-5555-88-0",
+                cover: "https://placehold.co/300x400/d97706/ffffff?text=Akuntansi+Lengkap",
+                desc: "Konsep pencatatan jurnal umum, neraca saldo, dan laporan keuangan perusahaan jasa serta dagang untuk siswa AKL."
+            },
+            {
+                id: 4,
+                title: "Basis Data & SQL Lanjutan",
+                author: "Fajar Nugraha, M.T.",
+                category: "Teknologi/RPL",
+                status: "Tersedia",
+                isbn: "978-602-1111-22-3",
+                cover: "https://placehold.co/300x400/0f172a/ffffff?text=Basis+Data+SQL",
+                desc: "Pembahasan mendalam perancangan ERD, normalisasi data, serta pengoperasian database PostgreSQL & MySQL."
+            },
+            {
+                id: 5,
+                title: "Laskar Pelangi",
+                author: "Andrea Hirata",
+                category: "Novel",
+                status: "Tersedia",
+                isbn: "978-979-3062-79-2",
+                cover: "https://placehold.co/300x400/9333ea/ffffff?text=Laskar+Pelangi",
+                desc: "Kisah inspiratif tentang sepuluh anak dari keluarga miskin yang berjuang menuntut ilmu di Belitung."
+            },
+            {
+                id: 6,
+                title: "Sistem Chasis & Pemindah Daya",
+                author: "Suryanto, S.Pd.",
+                category: "Otomotif/TKRO",
+                status: "Tersedia",
+                isbn: "978-602-7777-99-1",
+                cover: "https://placehold.co/300x400/2563eb/ffffff?text=Chasis+Otomotif",
+                desc: "Sistem rem, kemudi, suspensi, transmisi manual dan otomatis kendaraan roda empat."
+            },
+            {
+                id: 7,
+                title: "Pendidikan Pancasila & Kewarganegaraan",
+                author: "Tim Kemendikbud",
+                category: "Umum",
+                status: "Tersedia",
+                isbn: "978-602-244-311-2",
+                cover: "https://placehold.co/300x400/dc2626/ffffff?text=PPKn+SMK",
+                desc: "Buku teks utama mata pelajaran normatif adaptif untuk membangun karakter kebangsaan siswa."
+            },
+            {
+                id: 8,
+                title: "Bumi Manusia",
+                author: "Pramoedya Ananta Toer",
+                category: "Novel",
+                status: "Dipinjam",
+                isbn: "978-979-97312-3-4",
+                cover: "https://placehold.co/300x400/475569/ffffff?text=Bumi+Manusia",
+                desc: "Novel sejarah pergerakan kebangsaan awal abad ke-20 melalui perjalanan Minke."
+            }
+        ];
+
+        let selectedCategory = "Semua";
+        let activeBookForLoan = null;
+
+        // Initialize App
+        document.addEventListener('DOMContentLoaded', () => {
+            renderBooks();
+            populateBookSelectOptions();
+            setupMobileMenu();
+            setDefaultDate();
+        });
+
+        // Toggle Mobile Menu
+        function setupMobileMenu() {
+            const btn = document.getElementById('mobile-menu-button');
+            const menu = document.getElementById('mobile-menu');
+            const links = document.querySelectorAll('.mobile-nav-link');
+
+            btn.addEventListener('click', () => {
+                menu.classList.toggle('hidden');
+            });
+
+            links.forEach(link => {
+                link.addEventListener('click', () => {
+                    menu.classList.add('hidden');
+                });
+            });
+        }
+
+        // Set default date to today for borrowing form
+        function setDefaultDate() {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('borrower-date').value = today;
+        }
+
+        // Category Selection
+        function setCategoryFilter(category) {
+            selectedCategory = category;
+            
+            // Update UI buttons
+            const buttons = document.querySelectorAll('.category-btn');
+            buttons.forEach(btn => {
+                if (btn.innerText.trim().toLowerCase().includes(category.toLowerCase()) || (category === 'Semua' && btn.innerText.trim() === 'Semua')) {
+                    btn.className = "category-btn active px-4 py-2 rounded-xl text-xs font-semibold transition-all bg-brand-600 text-white";
+                } else {
+                    btn.className = "category-btn px-4 py-2 rounded-xl text-xs font-semibold transition-all bg-slate-100 text-slate-600 hover:bg-slate-200";
+                }
+            });
+
+            renderBooks();
+        }
+
+        // Search & Filter Books
+        function filterBooks() {
+            renderBooks();
+        }
+
+        // Render Books Grid
+        function renderBooks() {
+            const grid = document.getElementById('books-grid');
+            const searchKeyword = document.getElementById('catalog-search').value.toLowerCase();
+            const emptyState = document.getElementById('empty-catalog-state');
+
+            const filtered = booksData.filter(book => {
+                const matchesCategory = (selectedCategory === "Semua") || (book.category === selectedCategory);
+                const matchesSearch = book.title.toLowerCase().includes(searchKeyword) || 
+                                      book.author.toLowerCase().includes(searchKeyword);
+                return matchesCategory && matchesSearch;
+            });
+
+            grid.innerHTML = "";
+
+            if (filtered.length === 0) {
+                emptyState.classList.remove('hidden');
+            } else {
+                emptyState.classList.add('hidden');
+                filtered.forEach(book => {
+                    const isAvailable = book.status === "Tersedia";
+                    const statusBadge = isAvailable
+                        ? `<span class="px-2.5 py-1 bg-emerald-50 text-emerald-600 text-[11px] font-semibold rounded-full"><i class="fa-solid fa-circle-check text-[9px] mr-1"></i> Tersedia</span>`
+                        : `<span class="px-2.5 py-1 bg-rose-50 text-rose-600 text-[11px] font-semibold rounded-full"><i class="fa-solid fa-circle-xmark text-[9px] mr-1"></i> Dipinjam</span>`;
+
+                    const cardHtml = `
+                        <div class="bg-white rounded-2xl border border-slate-200 p-4 shadow-sm hover:shadow-md transition-all flex flex-col justify-between group">
+                            <div>
+                                <div class="relative overflow-hidden rounded-xl mb-3 bg-slate-100">
+                                    <img src="${book.cover}" alt="${book.title}" class="w-full h-52 object-cover group-hover:scale-105 transition-transform duration-300">
+                                    <span class="absolute top-2 left-2 bg-slate-900/80 backdrop-blur-md text-white text-[10px] px-2 py-0.5 rounded-md font-medium">${book.category}</span>
+                                </div>
+                                <h4 class="font-bold text-slate-900 text-sm line-clamp-2 mb-1 group-hover:text-brand-600 transition-colors">${book.title}</h4>
+                                <p class="text-xs text-slate-500 mb-3">${book.author}</p>
+                            </div>
+                            
+                            <div>
+                                <div class="flex justify-between items-center mb-3">
+                                    ${statusBadge}
+                                    <button onclick="openBookModal(${book.id})" class="text-xs text-brand-600 font-semibold hover:underline">Detail</button>
+                                </div>
+                                <button onclick="selectForBorrow(${book.id})" ${!isAvailable ? 'disabled' : ''} class="w-full py-2 px-3 rounded-xl text-xs font-semibold transition-all ${isAvailable ? 'bg-brand-600 hover:bg-brand-700 text-white shadow-sm' : 'bg-slate-200 text-slate-400 cursor-not-allowed'}">
+                                    ${isAvailable ? '<i class="fa-solid fa-hand-holding-hand mr-1"></i> Pinjam Buku' : 'Tidak Tersedia'}
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                    grid.insertAdjacentHTML('beforeend', cardHtml);
+                });
+            }
+        }
+
+        // Populate Options for Select dropdown
+        function populateBookSelectOptions() {
+            const select = document.getElementById('borrower-book');
+            select.innerHTML = '<option value="">-- Pilih Buku yang Tersedia --</option>';
+            
+            booksData.forEach(book => {
+                if(book.status === "Tersedia") {
+                    const opt = document.createElement('option');
+                    opt.value = book.title;
+                    opt.textContent = `${book.title} (${book.category})`;
+                    select.appendChild(opt);
+                }
+            });
+        }
+
+        // Hero Quick Search Trigger
+        function handleHeroSearch(e) {
+            e.preventDefault();
+            const query = document.getElementById('hero-search-input').value;
+            if(query) {
+                document.getElementById('catalog-search').value = query;
+                document.getElementById('katalog').scrollIntoView({ behavior: 'smooth' });
+                filterBooks();
+            }
+        }
+
+        // Modal Functions
+        function openBookModal(bookId) {
+            const book = booksData.find(b => b.id === bookId);
+            if(!book) return;
+
+            activeBookForLoan = book;
+
+            document.getElementById('modal-book-cover').src = book.cover;
+            document.getElementById('modal-book-category').textContent = book.category;
+            document.getElementById('modal-book-title').textContent = book.title;
+            document.getElementById('modal-book-author').textContent = `Penulis: ${book.author}`;
+            document.getElementById('modal-book-isbn').textContent = `ISBN: ${book.isbn}`;
+            document.getElementById('modal-book-desc').textContent = book.desc;
+
+            const statusEl = document.getElementById('modal-book-status');
+            const btnEl = document.getElementById('modal-borrow-btn');
+
+            if(book.status === "Tersedia") {
+                statusEl.className = "inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-700";
+                statusEl.innerHTML = `<i class="fa-solid fa-circle-check"></i> Status: Tersedia untuk dipinjam`;
+                btnEl.disabled = false;
+                btnEl.className = "px-5 py-2 rounded-xl text-xs font-semibold bg-brand-600 hover:bg-brand-700 text-white shadow-md";
+            } else {
+                statusEl.className = "inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-rose-100 text-rose-700";
+                statusEl.innerHTML = `<i class="fa-solid fa-circle-xmark"></i> Status: Sedang dipinjam`;
+                btnEl.disabled = true;
+                btnEl.className = "px-5 py-2 rounded-xl text-xs font-semibold bg-slate-300 text-slate-500 cursor-not-allowed";
+            }
+
+            document.getElementById('book-modal').classList.remove('hidden');
+        }
+
+        function closeBookModal() {
+            document.getElementById('book-modal').classList.add('hidden');
+        }
+
+        function selectForBorrow(bookId) {
+            const book = booksData.find(b => b.id === bookId);
+            if(book && book.status === "Tersedia") {
+                document.getElementById('borrower-book').value = book.title;
+                document.getElementById('peminjaman').scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function directBorrowFromModal() {
+            if(activeBookForLoan && activeBookForLoan.status === "Tersedia") {
+                closeBookModal();
+                selectForBorrow(activeBookForLoan.id);
+            }
+        }
+
+        // Form Submission Logic & Receipt Generation
+        function handleBorrowSubmit(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('borrower-name').value;
+            const nisn = document.getElementById('borrower-nisn').value;
+            const kelas = document.getElementById('borrower-class').value;
+            const bookTitle = document.getElementById('borrower-book').value;
+            const dateStr = document.getElementById('borrower-date').value;
+
+            // Generate Random Transaction ID
+            const trxId = "LIB-SWC-" + Math.floor(100000 + Math.random() * 900000);
+
+            // Calculate Due Date (+7 Days)
+            const startDate = new Date(dateStr);
+            const dueDate = new Date(startDate);
+            dueDate.setDate(dueDate.getDate() + 7);
+
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            const formattedBorrowDate = startDate.toLocaleDateString('id-ID', options);
+            const formattedDueDate = dueDate.toLocaleDateString('id-ID', options);
+
+            // Fill Receipt Modal
+            document.getElementById('receipt-id').textContent = trxId;
+            document.getElementById('receipt-name').textContent = name;
+            document.getElementById('receipt-nisn-class').textContent = `${nisn} (${kelas})`;
+            document.getElementById('receipt-book').textContent = bookTitle;
+            document.getElementById('receipt-date').textContent = formattedBorrowDate;
+            document.getElementById('receipt-due').textContent = formattedDueDate;
+
+            // Generate QR Code
+            const qrContainer = document.getElementById('qrcode');
+            qrContainer.innerHTML = "";
+            new QRCode(qrContainer, {
+                text: `${trxId}|${nisn}|${bookTitle}`,
+                width: 100,
+                height: 100,
+                colorDark: "#0f172a",
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.H
+            });
+
+            // Open Receipt Modal
+            document.getElementById('receipt-modal').classList.remove('hidden');
+
+            // Reset Form
+            document.getElementById('borrowing-form').reset();
+            setDefaultDate();
+        }
+
+        function closeReceiptModal() {
+            document.getElementById('receipt-modal').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
